@@ -92,10 +92,10 @@ function moverIzquierda() {
     mostrarCinta();
 }
 
-function moverDerecha() {
+function moverDerecha(agregarEspacio = true) {
     if (posicionCabezal < cinta.length - 1) {
         posicionCabezal++;
-    } else {
+    } else if (agregarEspacio) {
         cinta.push('_'); // Añade un espacio en blanco si se mueve fuera de la cinta actual
         posicionCabezal++;
     }
@@ -141,14 +141,33 @@ function buscarIzquierda() {
 function buscarDiferenteDerecha() {
     let simboloSustitucion = prompt("Introduce el símbolo para sustituir los elementos diferentes al guardado:");
 
-    // Mueve el cabezal hacia la derecha, sustituyendo símbolos diferentes al guardado,
-    // deteniéndose al encontrar un espacio en blanco
+    let iteraciones = 0; // Contador para evitar bucle infinito
+    const maxIteraciones = 30; // Límite máximo de iteraciones
+
+    // Mueve el cabezal a la derecha hasta encontrar un símbolo diferente al guardado
+    while (posicionCabezal < cinta.length && cinta[posicionCabezal] === simboloGuardado) {
+        if (iteraciones++ > maxIteraciones) {
+            console.error("Bucle infinito detectado en buscarDiferenteDerecha (primer bucle).");
+            break;
+        }
+        moverDerecha(false); // No agregar espacio en blanco
+    }
+    
+    iteraciones = 0; // Reiniciar el contador para el segundo bucle
+    // Sustituye los símbolos diferentes al guardado hasta encontrar un espacio en blanco
     while (posicionCabezal < cinta.length && cinta[posicionCabezal] !== ' ') {
+        if (iteraciones++ > maxIteraciones) {
+            console.error("Bucle infinito detectado en buscarDiferenteDerecha (segundo bucle).");
+            break;
+        }
+
         if (cinta[posicionCabezal] !== simboloGuardado) {
             cinta[posicionCabezal] = simboloSustitucion; // Sustituir el símbolo
         }
-        moverDerecha();
+        moverDerecha(false); // No agregar espacio en blanco
     }
+    
+    mostrarCinta(); // Actualiza la cinta para reflejar los cambios
 }
 
 
