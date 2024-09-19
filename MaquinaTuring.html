@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina de Turing Compuesta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Simulación de Máquina de Turing - Lenguajes Automatas</h1>
+    </header>
+    <div class="container">
+        <div class="input-section">
+            <label for="inputString">Cadena de Entrada:</label>
+            <input type="text" id="inputString">
+            <label for="headPosition">Posición Inicial del Cabezal:</label>
+            <input type="number" id="headPosition" min="0">
+            <button class="primary-button" onclick="iniciarMaquinaTuring()">Iniciar Máquina de Turing</button>
+        </div>
+        <div class="tape-section">
+            <h2>Cinta</h2>
+            <div id="tape"></div>
+        </div>
+        <div class="menu-section">
+            <h2>Operaciones</h2>
+            <div class="button-group">
+                <button onclick="agregarOperacion('moverIzquierda')">Mover Izquierda</button>
+                <button onclick="agregarOperacion('moverDerecha')">Mover Derecha</button>
+                <button onclick="agregarOperacion('escribirSimbolo')">Escribir Símbolo</button>
+                <button onclick="agregarOperacion('guardarSimbolo')">Guardar Símbolo</button>
+                <button onclick="agregarOperacion('escribirSimboloGuardado')">Escribir Símbolo Guardado</button>
+                <button onclick="agregarOperacion('buscarDerecha')">Buscar Derecha</button>
+                <button onclick="agregarOperacion('buscarIzquierda')">Buscar Izquierda</button>
+                <button onclick="agregarOperacion('buscarDiferenteDerecha')">Buscar Diferente Derecha</button>
+                <button onclick="agregarOperacion('buscarDiferenteIzquierda')">Buscar Diferente Izquierda</button>
+                <button class="primary-button" onclick="ejecutarOperaciones()">Ejecutar Operaciones</button>
+            </div>
+        </div>
+        <div id="operationsList">
+            <h2>Lista de Operaciones</h2>
+            <ul id="operations"></ul>
+        </div>
+        <div id="compositeMachine">
+            <h2>Máquina Compuesta</h2>
+            <div id="machineStatus"></div>
+        </div>
+        <div id="status"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
